@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Text Separator by *</title>
+  <style>
+    :root {
+      --bg-color: #f5f5f5;
+      --text-color: #222;
+      --input-bg: #fff;
+      --output-bg: #f7f7f7;
+      --border-color: #ccc;
+      --btn-bg: #4CAF50;
+      --btn-hover: #45a049;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --input-bg: #1e1e1e;
+      --output-bg: #1c1c1c;
+      --border-color: #444;
+      --btn-bg: #3b9240;
+      --btn-hover: #317c36;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 40px;
+      margin: 0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 90%;
+      max-width: 600px;
+      height: 100px; /* Reduced height */
+      padding: 15px;
+      font-size: 16px;
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      resize: vertical;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    #output {
+      background-color: var(--output-bg);
+    }
+
+    .dark-mode-toggle {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+    }
+
+    .dark-mode-toggle button {
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: var(--btn-bg);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dark-mode-toggle button:hover {
+      background-color: var(--btn-hover);
+    }
+  </style>
+</head>
+<body>
+  <div class="dark-mode-toggle">
+    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  </div>
+
+  <h1>Text Separator Tool</h1>
+
+  <textarea id="input" placeholder="Paste your text here with * as separator..."></textarea>
+  <textarea id="output" placeholder="Result will appear here..." readonly></textarea>
+
+  <script>
+    const inputBox = document.getElementById('input');
+    const outputBox = document.getElementById('output');
+
+    inputBox.addEventListener('input', () => {
+      const input = inputBox.value;
+      const parts = input.split('*').map(s => s.trim()).filter(Boolean);
+      outputBox.value = parts.join('\n');
+    });
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
